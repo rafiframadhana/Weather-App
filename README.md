@@ -28,7 +28,7 @@ A simple weather web application that allows users to check the current weather 
 3. Enter the city name in the search bar to get the current weather for that city.
 
 4. The app will display:
-   - Temperature (in Celsius or Fahrenheit)
+   - Temperature (in Celsius)
    - Weather description (e.g., sunny, cloudy)
    - Humidity and wind speed
    - Icon representing the current weather condition
