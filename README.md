@@ -1,4 +1,4 @@
-# Weather Web App
+# Weather App
 
 A simple weather web application that allows users to check the current weather based on their location or by searching for a specific city. The app fetches weather data from a weather API and displays it in an easy-to-understand format.
 
