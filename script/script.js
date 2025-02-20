@@ -1,7 +1,7 @@
 const weatherForm = document.querySelector('.weatherForm');
 const cityInput = document.querySelector('.cityInput');
 const card = document.querySelector('.card');
-const apiKey = '9397d91b8f28eee88c8b310de3c8fda9';
+const apiKey = config.API_KEY;
 
 weatherForm.addEventListener('submit', async event => {
 
@@ -12,11 +12,18 @@ weatherForm.addEventListener('submit', async event => {
     if (city) {
 
         try {
+            showLoading();
             const weatherData = await getWeatherData(city);
-            displayWeatherInfo(weatherData);
+
+            //give 1.5 sec loading
+            setTimeout(() => {
+                hideLoading();
+                displayWeatherInfo(weatherData);
+            }, 1500);
 
         } catch (error) {
             console.error(error);
+            hideLoading();
             displayError(error);
         }
     }
@@ -25,6 +32,22 @@ weatherForm.addEventListener('submit', async event => {
     }
 
 });
+
+
+function showLoading() {
+    card.textContent = "";
+    card.style.display = "block";
+
+    const loader = document.createElement('div');
+    loader.classList.add('loader');
+    card.appendChild(loader);
+}
+
+function hideLoading() {
+    const loader = document.querySelector('.loader');
+    if (loader) loader.remove();
+}
+
 
 async function getWeatherData(city) {
 
@@ -134,3 +157,14 @@ function displayError(message) {
     card.style.display = 'flex'
     card.appendChild(errorDisplay);
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const defaultCity = "Jakarta";
+        const weatherData = await getWeatherData(defaultCity);
+        displayWeatherInfo(weatherData);
+    } catch (error) {
+        console.error(error);
+        displayError(error.message);
+    }
+});
